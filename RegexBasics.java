@@ -35,7 +35,7 @@ public class RegexBasics{
     Scanner fin1 = new Scanner(new File(filename1));
     ArrayList<String> phonelist = new ArrayList<String>();
     int count1 = 0;
-    Pattern pattern1 = Pattern.compile("^(?[0-9]{3})?[- ]?[0-9]{4}[ -]?[0-9]{4}$");
+    Pattern pattern1 = Pattern.compile("\\(?[0-9]{3}(\\) | |-)?[0-9]{3}-?[0-9]{4}");
       while(fin1.hasNextLine()){
         String line1 = fin1.nextLine().trim();
         if (!line1.isEmpty()) { // Avoid adding empty lines
@@ -55,29 +55,32 @@ public class RegexBasics{
       }
 
       }
-  //   System.out.println("Input filename (phone): ");
-  //   String filename1 = in.nextLine();
-  //   Scanner fin1 = new Scanner(new File(filename));
-  //   ArrayList<Integer> phonelist = new ArrayList<Integer>();
-  //   for (int i = 0; i < lines; i++) {
-  //     while(fin1.hasNextInt()){
-  //       phonelist.add(fin1.nextInt());
-  //     }
-  //   }
-  //   Pattern pattern = Pattern.compile(yourRegexPattern);
 
+    System.out.println("Input filename (email): ");
+    String filename2 = in.nextLine();
+    Scanner fin2 = new Scanner(new File(filename2));
+    ArrayList<String> emaillist = new ArrayList<String>();
+    int count2 = 0;
+    Pattern pattern2 = Pattern.compile("^[a-z\\.\\-_]+@[a-z\\-]+\\.[a-z]{2,4}$", Pattern.CASE_INSENSITIVE);
+      while(fin2.hasNextLine()){
+        String line2 = fin2.nextLine().trim();
+        if (!line2.isEmpty()) { // Avoid adding empty lines
+          emaillist.add(line2);
+          count2++;
+        }
+      }
+      System.out.println(count2);
+      boolean matchFound2 = false;
+      for(int i = 0; i < count2; i++){
+        matchFound2 = pattern2.matcher(emaillist.get(i)).matches();
+      if(matchFound2){
+        System.out.println(emaillist.get(i) + " is a valid email address");
+      }
+      else{
+        System.out.println(emaillist.get(i) + " is not a valid email address");
+      }
 
-
-  //   System.out.println("Input filename (email): ");
-  //   String filename = in.nextLine();
-  //   Scanner fin = new Scanner(new File(filename));
-  //   ArrayList<Integer> emaillist = new ArrayList<Integer>();
-  //   for (int i = 0; i < lines; i++) {
-  //     while(fin.hasNextInt()){
-  //       emaillist.add(fin.nextInt());
-  //     }
-  //   }
-  //   Pattern pattern = Pattern.compile(yourRegexPattern);
+      }
 }
 
     }
